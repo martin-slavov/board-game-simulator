@@ -1,6 +1,9 @@
 package game.players;
 
+import game.investments.Investment;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -40,6 +43,7 @@ public class Player {
 
     /**
      * Gets the player's name.
+     *
      * @return The player's name.
      */
     public String getName() {
@@ -48,6 +52,7 @@ public class Player {
 
     /**
      * Gets the player's current balance.
+     *
      * @return The current balance.
      */
     public double getBalance() {
@@ -56,6 +61,7 @@ public class Player {
 
     /**
      * Adds a specified amount of money to the player's balance.
+     *
      * @param amount The amount to add.
      */
     public void addMoney(double amount) {
@@ -65,6 +71,7 @@ public class Player {
     /**
      * Deducts a specified amount of money from the player's balance.
      * The balance can become negative.
+     *
      * @param amount The amount to deduct.
      */
     public void deductMoney(double amount) {
@@ -73,6 +80,7 @@ public class Player {
 
     /**
      * Gets the player's current position on the board.
+     *
      * @return The current board position (0-indexed).
      */
     public int getCurrentPosition() {
@@ -82,6 +90,7 @@ public class Player {
     /**
      * Updates the player's position on the board.
      * Uses the modulo operator to handle wrapping around the board.
+     *
      * @param newPosition The new raw position (can be greater than board size).
      */
     public void setPosition(int newPosition) {
@@ -90,6 +99,7 @@ public class Player {
 
     /**
      * Checks if the player has an active "Steal" plan.
+     *
      * @return True if a steal plan is active, false otherwise.
      */
     public boolean hasStealPlan() {
@@ -98,6 +108,7 @@ public class Player {
 
     /**
      * Sets the status of the player's "Steal" plan.
+     *
      * @param hasStealPlan True to activate a steal plan, false to deactivate.
      */
     public void setHasStealPlan(boolean hasStealPlan) {
@@ -106,6 +117,7 @@ public class Player {
 
     /**
      * Checks if the player is a bot.
+     *
      * @return True if the player is a bot, false if human.
      */
     public boolean isBot() {
@@ -114,6 +126,7 @@ public class Player {
 
     /**
      * Gets the list of investments made by the player.
+     *
      * @return A list of Investment objects.
      */
     public List<Investment> getInvestments() {
@@ -122,6 +135,7 @@ public class Player {
 
     /**
      * Adds a new investment to the player's portfolio.
+     *
      * @param investment The Investment object to add.
      */
     public void addInvestment(Investment investment) {
@@ -144,6 +158,7 @@ public class Player {
 
     /**
      * Gets the count of traps activated by the player in the current cycle.
+     *
      * @return The number of activated traps.
      */
     public int getTrapsActivated() {
