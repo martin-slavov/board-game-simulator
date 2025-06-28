@@ -3,6 +3,10 @@ package game.board.squares;
 import game.investments.InvestmentManager;
 import game.players.Player;
 
+/**
+ * Represents the "Invest" square on the board.
+ * When a player lands on this square, they get an opportunity to invest in a company.
+ */
 public class InvestSquare extends Square {
     private InvestmentManager investmentManager;
 
