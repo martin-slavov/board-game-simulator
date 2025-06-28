@@ -1,4 +1,4 @@
-package game.board.squares.traps;
+package game.traps;
 
 import game.players.Player;
 
