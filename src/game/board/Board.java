@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Board {
     public static final int BOARD_SIZE = 20;
-    private List<Square> squares = new ArrayList<>(BOARD_SIZE);
+    private List<Square> board = new ArrayList<>(BOARD_SIZE);
 
     private StartSquare start = new StartSquare();
 
@@ -45,7 +45,7 @@ public class Board {
      */
     public Board() {
         initializeBoard();
-        Collections.shuffle(squares); // Shuffling the list
+        Collections.shuffle(board); // Shuffling the list
     }
 
     /**
@@ -53,29 +53,29 @@ public class Board {
      * This method defines the layout of the game board.
      */
     private void initializeBoard() {
-        squares.add(trap1);
-        squares.add(trap2);
-        squares.add(trap3);
-        squares.add(trap4);
-        squares.add(trap5);
-        squares.add(trap6);
-        squares.add(trap7);
+        board.add(trap1);
+        board.add(trap2);
+        board.add(trap3);
+        board.add(trap4);
+        board.add(trap5);
+        board.add(trap6);
+        board.add(trap7);
 
-        squares.add(invest1);
-        squares.add(invest2);
-        squares.add(invest3);
+        board.add(invest1);
+        board.add(invest2);
+        board.add(invest3);
 
-        squares.add(partyHard1);
-        squares.add(partyHard2);
-        squares.add(partyHard3);
+        board.add(partyHard1);
+        board.add(partyHard2);
+        board.add(partyHard3);
 
-        squares.add(chance1);
-        squares.add(chance2);
-        squares.add(chance3);
+        board.add(chance1);
+        board.add(chance2);
+        board.add(chance3);
 
-        squares.add(steal1);
-        squares.add(steal2);
-        squares.add(steal3);
+        board.add(steal1);
+        board.add(steal2);
+        board.add(steal3);
     }
 
     /**
@@ -86,9 +86,17 @@ public class Board {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Game Board Layout:\n");
-        for (Square square : squares) {
+        for (Square square : board) {
             sb.append(square).append("\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * Gets the list of the square
+     * @return The square's type.
+     */
+    public List<Square> getBoard() {
+        return board;
     }
 }

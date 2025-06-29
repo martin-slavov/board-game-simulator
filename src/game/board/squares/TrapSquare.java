@@ -33,7 +33,7 @@ public class TrapSquare extends Square {
      */
     @Override
     public void performAction(Player player) {
-        System.out.println(player.getName() + " landed on a " + getType() + " square.");
+        System.out.println(player.getName() + " landed on a " + getType()  + " square.");
 
         // TODO: Implement logic for setting a trap.
     }
