@@ -12,13 +12,10 @@ public class ChanceSquare extends Square {
 
     /**
      * Constructs a ChanceSquare.
-     *
-     * @param position The position of the square on the board.
-     * @param dice     The Dice object used for rolling to determine the outcome.
      */
-    public ChanceSquare(int position, Dice dice) {
-        super("Chance", SquareType.CHANCE, position);
-        this.dice = dice;
+    public ChanceSquare() {
+        super(SquareType.CHANCE);
+        this.dice = new Dice();
     }
 
     /**
@@ -29,7 +26,7 @@ public class ChanceSquare extends Square {
      */
     @Override
     public void performAction(Player player) {
-        System.out.println(player.getName() + " landed on a " + getName() + " square.");
+        System.out.println(player.getName() + " landed on a " + getType() + " square.");
 
         int outcomeRoll = dice.rollTenSidedDice();
         int chanceRoll = dice.rollHundredSidedDice();

@@ -12,11 +12,9 @@ public class StealSquare extends Square {
 
     /**
      * Constructs a StealSquare.
-     *
-     * @param position The position of the square on the board.
      */
-    public StealSquare(int position) {
-        super("Steal", SquareType.STEAL, position);
+    public StealSquare() {
+        super(SquareType.STEAL);
     }
 
     /**
@@ -27,7 +25,7 @@ public class StealSquare extends Square {
      */
     @Override
     public void performAction(Player player) {
-        System.out.println(player.getName() + " landed on a " + getName() + " square.");
+        System.out.println(player.getName() + " landed on a " + getType() + " square.");
 
         // TODO: Implement the logic for stealing an investment.
     }

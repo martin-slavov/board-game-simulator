@@ -9,12 +9,10 @@ public class StartSquare extends Square {
     /**
      * Constructs the StartSquare.
      * It is always named "Start" and has the START type.
-     *
-     * @param position The position of the square on the board (always 0).
      */
 
-    public StartSquare(int position) {
-        super("Start", SquareType.START, position);
+    public StartSquare() {
+        super(SquareType.START );
     }
 
     /**
@@ -26,7 +24,7 @@ public class StartSquare extends Square {
     @Override
     public void performAction(Player player) {
         player.addMoney(BONUS_AMOUNT);
-        System.out.println(player.getName() + " landed on " + getName() +
+        System.out.println(player.getName() + " landed on " + getType() +
                 " and received " + BONUS_AMOUNT + " money. " +
                 "New balance: " + player.getBalance());
     }

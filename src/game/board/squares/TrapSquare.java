@@ -19,11 +19,9 @@ public class TrapSquare extends Square {
     /**
      * Constructs a TrapSquare.
      * The square automatically initializes the list of available traps.
-     *
-     * @param position The position of the square on the board.
      */
-    public TrapSquare(int position) {
-        super("Trap", SquareType.TRAP, position);
+    public TrapSquare() {
+        super(SquareType.TRAP);
         this.availableTraps = TrapInitializer.initializeTraps();
     }
 
@@ -35,7 +33,7 @@ public class TrapSquare extends Square {
      */
     @Override
     public void performAction(Player player) {
-        System.out.println(player.getName() + " landed on a " + getName() + " square.");
+        System.out.println(player.getName() + " landed on a " + getType() + " square.");
 
         // TODO: Implement logic for setting a trap.
     }

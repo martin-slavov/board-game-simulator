@@ -14,14 +14,11 @@ public class InvestSquare extends Square {
 
     /**
      * Constructs an InvestSquare.
-     *
-     * @param position          The position of the square on the board.
      * @param investmentManager The manager responsible for investment logic.
      */
-    public InvestSquare(int position, InvestmentManager investmentManager) {
-        super("Investment Square", SquareType.INVEST, position);
-
-        this.investmentManager = investmentManager;
+    public InvestSquare() {
+        super(SquareType.INVEST);
+        this.investmentManager = new InvestmentManager();
     }
 
     /**
@@ -32,7 +29,7 @@ public class InvestSquare extends Square {
      */
     @Override
     public void performAction(Player player) {
-        System.out.println(player.getName() + " landed on " + getName() + " square.");
+        System.out.println(player.getName() + " landed on " + getType() + " square.");
 
         // TODO: Implement the logic to handle player investment.
     }
