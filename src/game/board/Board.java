@@ -53,6 +53,8 @@ public class Board {
      * This method defines the layout of the game board.
      */
     private void initializeBoard() {
+        board.add(start);
+
         board.add(trap1);
         board.add(trap2);
         board.add(trap3);
