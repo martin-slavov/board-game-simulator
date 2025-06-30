@@ -1,5 +1,6 @@
 package game.board.squares;
 
+import game.Game;
 import game.players.Player;
 
 /**
@@ -24,9 +25,13 @@ public class StealSquare extends Square {
      * @param player The player who landed on the square.
      */
     @Override
-    public void performAction(Player player) {
+    public void performAction(Player player, Game game) {
         System.out.println(player.getName() + " landed on a " + getType() + " square.");
 
+        if (player.isCanNotUseSteelSquare()) {
+            System.out.println("Този път няма а може да се възползвате от тази опция");
+            player.setCanNotUseSteelSquare(false);
+        }
         // TODO: Implement the logic for stealing an investment.
     }
 }

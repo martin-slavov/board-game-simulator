@@ -1,5 +1,6 @@
 package game.board.squares;
 
+import game.Game;
 import game.players.Player;
 
 /**
@@ -22,7 +23,7 @@ public abstract class Square {
      * Each subclass must provide its own implementation of this method
      * @param player The player who lands on the square.
      */
-    public abstract void performAction(Player player);
+    public abstract void performAction(Player player, Game game);
 
     /**
      * Gets the type of the square

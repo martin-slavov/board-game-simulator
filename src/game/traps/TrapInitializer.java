@@ -1,5 +1,7 @@
 package game.traps;
 
+import game.players.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,43 +16,14 @@ public class TrapInitializer {
      *
      * @return A list containing all predefined Trap objects.
      */
-    public static List<Trap> initializeTraps() {
+    public static List<Trap> initializeTraps(Player player) {
         List<Trap> traps = new ArrayList<>();
 
-        traps.add(new Trap(
-                "Данъчна ревизия",
-                "Анонимен сигнал е насосал органите на котешката данъчна полиция, морално осакатените ръководители трябва да напуснат страната възможно най-бързо.",
-                "Губи 10 процента от величите си приходи в край на цикъла.",
-                10.0
-        ));
-
-        traps.add(new Trap(
-                "Развод по котешки",
-                "Съпругата на основния акционер е намерила сили да признае, че щастието й е илюзорно. Подала е документи за развод и иска да получи всичко.",
-                "В края на цикъла, играта хвърля 10-стенен зар, ако стойността е 2 или 8, не получава печалба или загуба от цикъла.",
-                20.0
-        ));
-
-        traps.add(new Trap(
-                "Пропаганда",
-                "Започва мащабна кампания, промотираща вредата от консумация на вафли, народът изпада в паника и активно избягва своята икономическа активност.",
-                "Не можете да поставяте повече капани в рамките на текущия цикъл.",
-                100.0
-        ));
-
-        traps.add(new Trap(
-                "Проглеждане",
-                "Моралът в бизнеса скача, изпълнителният директор на компанията търси доброто в хората и отказва да участва в мръсни игрички.",
-                "При попадане на квадратче Steal играчът губи право да реализира злия си план.",
-                50.0
-        ));
-
-        traps.add(new Trap(
-                "Хазартен бос",
-                "Главният счетоводител е намерил утеха в ротативките и активно консумира пенсионните фондове на служителите за финансиране на злите си дела.",
-                "Следващото квадратче Шанс ви носи само негативни последици.",
-                100.0
-        ));
+        traps.add(new Trap("Tax Audit", 10, "You lose 10 percent of all your income.", player));
+        traps.add(new Trap("Cat Divorce", 20, "The player rolls a 10-sided die; if the value is 2 or 8, they do not gain or lose profit for 3 turns.", player));
+        traps.add(new Trap("Propaganda", 100, "You cannot set more traps within the current cycle.", player));
+        traps.add(new Trap("Seeing the Light", 50, "Upon landing on a Steal square, the player loses the right to execute an evil plan.", player));
+        traps.add(new Trap("Gambling Boss", 100, "The next Chance square brings you only negative consequences.", player));
 
         return traps;
     }

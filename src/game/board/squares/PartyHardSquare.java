@@ -1,5 +1,6 @@
 package game.board.squares;
 
+import game.Game;
 import game.players.Player;
 
 /**
@@ -24,7 +25,7 @@ public class PartyHardSquare extends Square {
      * @param player The player who landed on the square.
      */
     @Override
-    public void performAction(Player player) {
+    public void performAction(Player player, Game game) {
         System.out.println(player.getName() + " has passed through the " + getType() + " square.");
         player.deductMoney(PARTY_COST);
 

@@ -7,14 +7,14 @@ import java.util.Random;
  * It provides methods to generate random number for different game mechanics.
  */
 public class Dice {
-    private final Random random;
+    private static Random random;
 
     /**
      * Constructs a new Dice object.
      * Initializes the random number generator.
      */
     public Dice() {
-        this.random = new Random();
+        random = new Random();
     }
 
 
@@ -23,7 +23,7 @@ public class Dice {
      * The result is a random integer between 1 and 2, inclusive.
      * @return A random integer (1 or 2).
      */
-    public int rollTwoSidedDice() {
+    public static int rollTwoSidedDice() {
         return random.nextInt(1,3);
     }
 
@@ -33,7 +33,7 @@ public class Dice {
      * The result is a random integer between 1 and 10, inclusive.
      * @return A random integer (1-10).
      */
-    public int rollTenSidedDice() {
+    public static int rollTenSidedDice() {
         return random.nextInt(1,11);
     }
 
@@ -43,7 +43,7 @@ public class Dice {
      * The result is a random integer between 1 and 100, inclusive.
      * @return A random integer (1-100).
      */
-    public int rollHundredSidedDice() {
+    public static int rollHundredSidedDice() {
         return random.nextInt(1,101);
     }
 }

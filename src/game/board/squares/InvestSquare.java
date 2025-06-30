@@ -1,5 +1,6 @@
 package game.board.squares;
 
+import game.Game;
 import game.investments.InvestmentManager;
 import game.players.Player;
 
@@ -14,7 +15,6 @@ public class InvestSquare extends Square {
 
     /**
      * Constructs an InvestSquare.
-     * @param investmentManager The manager responsible for investment logic.
      */
     public InvestSquare() {
         super(SquareType.INVEST);
@@ -28,7 +28,7 @@ public class InvestSquare extends Square {
      * @param player The player who landed on the square.
      */
     @Override
-    public void performAction(Player player) {
+    public void performAction(Player player, Game game) {
         System.out.println(player.getName() + " landed on " + getType() + " square.");
 
         // TODO: Implement the logic to handle player investment.

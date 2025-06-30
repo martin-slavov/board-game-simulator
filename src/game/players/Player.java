@@ -1,5 +1,6 @@
 package game.players;
 
+import game.board.squares.Square;
 import game.investments.Investment;
 
 import java.util.ArrayList;
@@ -21,11 +22,15 @@ public class Player {
 
     private String name; // of the player
     private double balance;
-    private int currentPosition;
+    private Square currentSquare;
     private boolean hasStealPlan;
     private List<Investment> investments;
     private int trapsActivated;
     private boolean isBot; // true for the bot, false for the human player
+    private int turnsInNeutralState;
+    private boolean canNotUseSteelSquare;
+    private boolean isUnderBadLuckEffect;
+    private boolean canNotPlaceTrap;
 
 
     /**
@@ -35,10 +40,38 @@ public class Player {
         this.name = name;
         this.balance = INITIAL_BALANCE; // All players start with a fixed amount
         this.isBot = isBot;
-        this.currentPosition = 0; // All players start at position 0 (Start Square)
+        //this.currentSquare = 0; // All players start at position 0 (Start Square)
         this.hasStealPlan = false;
         this.investments = new ArrayList<>();
         this.trapsActivated = 0;
+        this.turnsInNeutralState = 0;
+        canNotUseSteelSquare = false;
+        isUnderBadLuckEffect = false;
+        canNotPlaceTrap = false;
+    }
+
+    public boolean isCanNotPlaceTrap() {
+        return canNotPlaceTrap;
+    }
+
+    public void setCanNotPlaceTrap(boolean canNotPlaceTrap) {
+        this.canNotPlaceTrap = canNotPlaceTrap;
+    }
+
+    public boolean isUnderBadLuckEffect() {
+        return isUnderBadLuckEffect;
+    }
+
+    public void setUnderBadLuckEffect(boolean underBadLuckEffect) {
+        isUnderBadLuckEffect = underBadLuckEffect;
+    }
+
+    public boolean isCanNotUseSteelSquare() {
+        return canNotUseSteelSquare;
+    }
+
+    public void setCanNotUseSteelSquare(boolean canNotUseSteelSquare) {
+        this.canNotUseSteelSquare = canNotUseSteelSquare;
     }
 
     /**
@@ -83,8 +116,8 @@ public class Player {
      *
      * @return The current board position (0-indexed).
      */
-    public int getCurrentPosition() {
-        return currentPosition;
+    public Square getCurrentSquare() {
+        return currentSquare;
     }
 
     /**
@@ -93,9 +126,9 @@ public class Player {
      *
      * @param newPosition The new raw position (can be greater than board size).
      */
-    public void setPosition(int newPosition) {
-        this.currentPosition = newPosition % BOARD_SIZE;
-    }
+//    public void setPosition(int newPosition) {
+//        this.currentSquare = newPosition % BOARD_SIZE;
+//    }
 
     /**
      * Checks if the player has an active "Steal" plan.
@@ -113,6 +146,22 @@ public class Player {
      */
     public void setHasStealPlan(boolean hasStealPlan) {
         this.hasStealPlan = hasStealPlan;
+    }
+
+    public int getTurnsInNeutralState() {
+        return turnsInNeutralState;
+    }
+
+    public boolean canNotGainOrLoseMoney() {
+        if (turnsInNeutralState > 0) {
+            System.out.println("Не може да печелите и губите пари още " + turnsInNeutralState-- + " пъти.");
+            return false;
+        }
+        return true;
+    }
+
+    public void setTurnsInNeutralState(int turnsInNeutralState) {
+        this.turnsInNeutralState = turnsInNeutralState;
     }
 
     /**

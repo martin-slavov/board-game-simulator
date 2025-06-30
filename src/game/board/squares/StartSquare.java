@@ -1,5 +1,6 @@
 package game.board.squares;
 
+import game.Game;
 import game.players.Player;
 
 public class StartSquare extends Square {
@@ -12,7 +13,7 @@ public class StartSquare extends Square {
      */
 
     public StartSquare() {
-        super(SquareType.START );
+        super(SquareType.START);
     }
 
     /**
@@ -22,7 +23,7 @@ public class StartSquare extends Square {
      * @param player The player who lands on the square.
      */
     @Override
-    public void performAction(Player player) {
+    public void performAction(Player player, Game game) {
         player.addMoney(BONUS_AMOUNT);
         System.out.println(player.getName() + " landed on " + getType() +
                 " and received " + BONUS_AMOUNT + " money. " +

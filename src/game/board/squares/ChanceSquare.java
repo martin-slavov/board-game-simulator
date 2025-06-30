@@ -1,5 +1,6 @@
 package game.board.squares;
 
+import game.Game;
 import game.dice.Dice;
 import game.players.Player;
 
@@ -25,10 +26,16 @@ public class ChanceSquare extends Square {
      * @param player The player who landed on the square.
      */
     @Override
-    public void performAction(Player player) {
+    public void performAction(Player player, Game game) {
         System.out.println(player.getName() + " landed on a " + getType() + " square.");
 
-        int outcomeRoll = dice.rollTenSidedDice();
+        if (player.isUnderBadLuckEffect()) {
+            player.setUnderBadLuckEffect(false);
+            int outcomeRoll = 1; // нечетно число -> лош късмет
+        } else {
+            int outcomeRoll = dice.rollTenSidedDice(); // четно за добър късмет, нечетно за лощ късмет
+        }
+
         int chanceRoll = dice.rollHundredSidedDice();
 
         // TODO: Implement the logic based on the two dice rolls.
