@@ -1,6 +1,7 @@
 package game.players;
 
 import game.board.squares.Square;
+import game.board.squares.SquareType;
 import game.investments.Investment;
 
 import java.util.ArrayList;
@@ -20,18 +21,18 @@ public class Player {
     public static final double INITIAL_BALANCE = 1000.0;
     public static final int BOARD_SIZE = 20;
 
-    private String name; // of the player
+    private final String name; // of the player
     private double balance;
     private Square currentSquare;
     private boolean hasStealPlan;
-    private List<Investment> investments;
+    private final List<Investment> investments;
     private int trapsActivated;
-    private boolean isBot; // true for the bot, false for the human player
+    private final boolean isBot; // true for the bot, false for the human player
     private int turnsInNeutralState;
     private boolean canNotUseSteelSquare;
     private boolean isUnderBadLuckEffect;
     private boolean canNotPlaceTrap;
-
+    private SquareType stealPlan;
 
     /**
      * Constructs a new Player object.
@@ -48,6 +49,14 @@ public class Player {
         canNotUseSteelSquare = false;
         isUnderBadLuckEffect = false;
         canNotPlaceTrap = false;
+    }
+
+    public SquareType getStealPlan() {
+        return stealPlan;
+    }
+
+    public void setStealPlan(SquareType stealPlan) {
+        this.stealPlan = stealPlan;
     }
 
     public boolean isCanNotPlaceTrap() {
