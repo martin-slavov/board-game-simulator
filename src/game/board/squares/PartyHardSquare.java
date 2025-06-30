@@ -30,6 +30,5 @@ public class PartyHardSquare extends Square {
         player.deductMoney(PARTY_COST);
 
         System.out.println(player.getName() + " paid " + PARTY_COST + " for the party. New balance: " + player.getBalance());
-        // TODO: Add logic to check for bankruptcy if balance drops below zero.
     }
 }

@@ -9,7 +9,7 @@ public class Investment {
     /**
      * Constructs a new Investment object.
      */
-    public Investment(Company company, double investedAmount, double profitLoss, boolean isCalculated) {
+    public Investment(Company company, double investedAmount) {
         this.company = company;
         this.investedAmount = investedAmount;
         this.profitLoss = 0.0;
