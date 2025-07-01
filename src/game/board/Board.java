@@ -12,40 +12,40 @@ import java.util.List;
  */
 public class Board {
     public static final int BOARD_SIZE = 20;
-    private List<Square> board = new ArrayList<>(BOARD_SIZE);
+    private final List<Square> board = new ArrayList<>(BOARD_SIZE);
 
-    private StartSquare start = new StartSquare();
+    private final StartSquare start = new StartSquare();
 
-    private TrapSquare trap1 = new TrapSquare();
-    private TrapSquare trap2 = new TrapSquare();
-    private TrapSquare trap3 = new TrapSquare();
-    private TrapSquare trap4 = new TrapSquare();
-    private TrapSquare trap5 = new TrapSquare();
-    private TrapSquare trap6 = new TrapSquare();
-    private TrapSquare trap7 = new TrapSquare();
+    private final TrapSquare trap1 = new TrapSquare();
+    private final TrapSquare trap2 = new TrapSquare();
+    private final TrapSquare trap3 = new TrapSquare();
+    private final TrapSquare trap4 = new TrapSquare();
+    private final TrapSquare trap5 = new TrapSquare();
+    private final TrapSquare trap6 = new TrapSquare();
+    private final TrapSquare trap7 = new TrapSquare();
 
-    private InvestSquare invest1 = new InvestSquare();
-    private InvestSquare invest2 = new InvestSquare();
-    private InvestSquare invest3 = new InvestSquare();
+    private final InvestSquare invest1 = new InvestSquare();
+    private final InvestSquare invest2 = new InvestSquare();
+    private final InvestSquare invest3 = new InvestSquare();
 
-    private PartyHardSquare partyHard1 = new PartyHardSquare();
-    private PartyHardSquare partyHard2 = new PartyHardSquare();
-    private PartyHardSquare partyHard3 = new PartyHardSquare();
+    private final PartyHardSquare partyHard1 = new PartyHardSquare();
+    private final PartyHardSquare partyHard2 = new PartyHardSquare();
+    private final PartyHardSquare partyHard3 = new PartyHardSquare();
 
-    private ChanceSquare chance1 = new ChanceSquare();
-    private ChanceSquare chance2 = new ChanceSquare();
-    private ChanceSquare chance3 = new ChanceSquare();
+    private final ChanceSquare chance1 = new ChanceSquare();
+    private final ChanceSquare chance2 = new ChanceSquare();
+    private final ChanceSquare chance3 = new ChanceSquare();
 
-    private StealSquare steal1 = new StealSquare();
-    private StealSquare steal2 = new StealSquare();
-    private StealSquare steal3 = new StealSquare();
+    private final StealSquare steal1 = new StealSquare();
+    private final StealSquare steal2 = new StealSquare();
+    private final StealSquare steal3 = new StealSquare();
 
     /**
      * Constructs a Board object and initializes all the squares.
      */
     public Board() {
-        initializeBoard();
-        Collections.shuffle(board); // Shuffling the list
+        initializeBoard(); // Adding objects to the list
+        shuffleSquares(); // Shuffling the list
     }
 
     /**
@@ -78,6 +78,15 @@ public class Board {
         board.add(steal1);
         board.add(steal2);
         board.add(steal3);
+    }
+
+    /**
+     * Shuffles all squares on the board, except for the StartSquare (which is always at index 0).
+     */
+    private void shuffleSquares() {
+        // Shuffling without StartSquare
+        List<Square> subListToShuffle = board.subList(1, board.size());
+        Collections.shuffle(subListToShuffle);
     }
 
     /**
