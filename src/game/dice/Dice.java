@@ -7,15 +7,15 @@ import java.util.Random;
  * It provides methods to generate random number for different game mechanics.
  */
 public class Dice {
-    private static Random random;
+    private static Random random = new Random();
 
-    /**
-     * Constructs a new Dice object.
-     * Initializes the random number generator.
-     */
-    public Dice() {
-        random = new Random();
-    }
+//    /**
+//     * Constructs a new Dice object.
+//     * Initializes the random number generator.
+//     */
+//    public Dice() {
+//        random = new Random();
+//    }
 
 
     /**

@@ -66,7 +66,12 @@ public class StealSquare extends Square {
                 (N) No
                 Your choice:"""
         );
-        String choice = game.getScanner().nextLine().trim().toUpperCase();
+        String choice;
+        if (player.isBot()) {
+            choice = botWantToSteal(game);
+        } else {
+            choice = game.getScanner().nextLine().trim().toUpperCase();
+        }
 
         switch (choice) {
             case YES_CHOICE -> askForTargetSquare(player, game);
@@ -89,7 +94,12 @@ public class StealSquare extends Square {
                 (S) Steal
                 Your choice:"""
         );
-        String choice = game.getScanner().nextLine().trim().toUpperCase();
+        String choice;
+        if (player.isBot()) {
+            choice = squareTypeToSteal(game);
+        } else {
+            choice = game.getScanner().nextLine().trim().toUpperCase();
+        }
 
         SquareType targetSquareType = null;
         switch (choice) {
@@ -104,5 +114,22 @@ public class StealSquare extends Square {
             player.setStealPlan(targetSquareType);
             System.out.println("Your steal plan is now active for " + targetSquareType + " squares.");
         }
+    }
+
+    private String botWantToSteal(Game game) {
+        return switch (game.getRandom().nextInt(2)) {
+            case 0 -> "Y";
+            case 1 -> "N";
+            default -> throw new IllegalArgumentException("Invalid choice");
+        };
+    }
+
+    private String squareTypeToSteal(Game game) {
+        return switch (game.getRandom().nextInt(3)) {
+            case 0 -> "C";
+            case 1 -> "T";
+            case 2 -> "S";
+            default -> throw new IllegalArgumentException("Invalid choice");
+        };
     }
 }

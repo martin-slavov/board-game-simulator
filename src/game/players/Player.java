@@ -1,7 +1,7 @@
 package game.players;
 
-import game.board.squares.Square;
 import game.board.squares.SquareType;
+import game.dice.Dice;
 import game.investments.Investment;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class Player {
 
     private final String name; // of the player
     private double balance;
-    private Square currentSquare;
+    private int currentPosition;
     private boolean hasStealPlan;
     private final List<Investment> investments;
     private int trapsActivated;
@@ -41,7 +41,7 @@ public class Player {
         this.name = name;
         this.balance = INITIAL_BALANCE; // All players start with a fixed amount
         this.isBot = isBot;
-        //this.currentSquare = 0; // All players start at position 0 (Start Square)
+        this.currentPosition = 0; // All players start at position 0 (Start Square)
         this.hasStealPlan = false;
         this.investments = new ArrayList<>();
         this.trapsActivated = 0;
@@ -49,6 +49,18 @@ public class Player {
         canNotUseSteelSquare = false;
         isUnderBadLuckEffect = false;
         canNotPlaceTrap = false;
+    }
+
+    public void move() {
+        int steps = Dice.rollTwoSidedDice();
+        int newPosition = currentPosition + steps;
+        currentPosition = newPosition % 20;
+
+        System.out.println(this.name + " се предвижи " + steps + " стъпки напред.");
+
+//        // Сигурно ще се премести в startGame метода
+//        Square currentSquare = board.getBoard().get(currentPosition);
+//        currentSquare.performAction(player, game);
     }
 
     public SquareType getStealPlan() {
@@ -125,8 +137,8 @@ public class Player {
      *
      * @return The current board position (0-indexed).
      */
-    public Square getCurrentSquare() {
-        return currentSquare;
+    public int getCurrentPosition() {
+        return currentPosition;
     }
 
     /**
@@ -221,5 +233,9 @@ public class Player {
      */
     public int getTrapsActivated() {
         return trapsActivated;
+    }
+
+    public boolean isHasStealPlan() {
+        return hasStealPlan;
     }
 }

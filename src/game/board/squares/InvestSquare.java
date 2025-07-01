@@ -54,11 +54,16 @@ public class InvestSquare extends Square {
         boolean flag = false;
         while (!flag) {
             displayInvestmentOptions(comp1, comp2);
-            String choice = game.getScanner().nextLine().trim().toUpperCase();
+            String choice;
+            if (player.isBot()) {
+                choice = getBotInvestmentDecision(game);
+            } else {
+                choice = game.getScanner().nextLine().trim().toUpperCase();
+            }
 
             switch (choice) {
-                case CHOICE_COMPANY_ONE -> processInvestmentChoice(player,game,comp1);
-                case CHOICE_COMPANY_TWO -> processInvestmentChoice(player,game,comp2);
+                case CHOICE_COMPANY_ONE -> processInvestmentChoice(player, game, comp1);
+                case CHOICE_COMPANY_TWO -> processInvestmentChoice(player, game, comp2);
                 case CHOICE_NO_INVESTMENT -> flag = true;
                 default -> throw new IllegalArgumentException("Invalid choice");
             }
@@ -99,14 +104,19 @@ public class InvestSquare extends Square {
                     Current balance: %.2f
                     Your amount: %n""", company.getName(), player.getBalance());
 
-            String amountChoice = game.getScanner().nextLine().trim().toUpperCase();
+            String amountChoice;
+            if (player.isBot()) {
+                amountChoice = String.valueOf(botInvestmentAmount(player, game, company));
+            } else {
+                amountChoice = game.getScanner().nextLine().trim().toUpperCase();
+            }
 
             if (amountChoice.equals(CHOICE_NO_INVESTMENT)) {
                 System.out.println("Returning to main investment menu.");
                 amountChosen = true; // Exit this inner loop, but `performAction` loop continues if needed.
             } else {
                 try {
-                    int amountToInvest = Integer.parseInt(amountChoice);
+                    double amountToInvest = Double.parseDouble(amountChoice);
 
                     // Basic validation: check if amount is positive and player has enough money
                     if (amountToInvest <= 0) {
@@ -115,12 +125,11 @@ public class InvestSquare extends Square {
                         System.out.println("You do not have enough money for this investment. Your balance: " + player.getBalance());
                     } else if (amountToInvest < company.getMinInvestment()) {
                         System.out.printf("The minimum investment for %s is %.0f. Please enter a higher amount.%n", company.getName(), company.getMinInvestment());
-                    }
-                    else {
+                    } else {
                         // All checks passed, create and add the investment
                         player.deductMoney(amountToInvest); // Deduct before adding investment
                         player.addInvestment(new Investment(company, amountToInvest));
-                        System.out.printf("Successfully invested %d in %s!%n", amountToInvest, company.getName());
+                        System.out.printf("Successfully invested %f in %s!%n", amountToInvest, company.getName());
                         amountChosen = true; // Investment successful, exit loop.
                     }
                 } catch (NumberFormatException e) {
@@ -129,5 +138,18 @@ public class InvestSquare extends Square {
                 }
             }
         }
+    }
+
+    private String getBotInvestmentDecision(Game game) {
+        return switch (game.getRandom().nextInt(3)) {
+            case 0 -> "1";
+            case 1 -> "2";
+            case 2 -> "N";
+            default -> throw new IllegalArgumentException("Invalid choice");
+        };
+    }
+
+    private double botInvestmentAmount(Player player, Game game, Company company) {
+        return game.getRandom().nextDouble(company.getMinInvestment(), player.getBalance());
     }
 }
