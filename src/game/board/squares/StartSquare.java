@@ -24,9 +24,11 @@ public class StartSquare extends Square {
      */
     @Override
     public void performAction(Player player, Game game) {
+        System.out.println(player.getName() + " landed on " + getType());
+        if (player.canNotGainOrLoseMoney()) return;
+
         player.addMoney(BONUS_AMOUNT);
-        System.out.println(player.getName() + " landed on " + getType() +
-                " and received " + BONUS_AMOUNT + " money. " +
+        System.out.println(player.getName() + " received " + BONUS_AMOUNT + " money. " +
                 "New balance: " + player.getBalance());
     }
 }

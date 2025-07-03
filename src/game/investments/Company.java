@@ -64,4 +64,15 @@ public class Company {
     public int getRiskMax() {
         return riskMax;
     }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "name='" + name + '\'' +
+                ", minInvestment=" + minInvestment +
+                ", returnCoefficient=" + returnCoefficient +
+                ", riskMin=" + riskMin +
+                ", riskMax=" + riskMax +
+                '}';
+    }
 }

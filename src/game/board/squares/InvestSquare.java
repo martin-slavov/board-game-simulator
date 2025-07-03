@@ -98,6 +98,10 @@ public class InvestSquare extends Square {
     private void processInvestmentChoice(Player player, Game game, Company company) {
         boolean amountChosen = false;
         while (!amountChosen) {
+            if (player.getBalance() <= company.getMinInvestment()) {
+                System.out.println(player.getName() + " does not have enough money to invest.");
+                return;
+            }
             System.out.printf("""
                     \nYou chose to invest in "%s". Please enter the amount you wish to invest,
                     or press 'N' to return to the previous menu:
@@ -127,6 +131,7 @@ public class InvestSquare extends Square {
                         System.out.printf("The minimum investment for %s is %.0f. Please enter a higher amount.%n", company.getName(), company.getMinInvestment());
                     } else {
                         // All checks passed, create and add the investment
+                        // TODO: Consolidate existing investments when adding to the same company.
                         player.deductMoney(amountToInvest); // Deduct before adding investment
                         player.addInvestment(new Investment(company, amountToInvest));
                         System.out.printf("Successfully invested %f in %s!%n", amountToInvest, company.getName());
@@ -149,7 +154,7 @@ public class InvestSquare extends Square {
         };
     }
 
-    private double botInvestmentAmount(Player player, Game game, Company company) {
-        return game.getRandom().nextDouble(company.getMinInvestment(), player.getBalance());
+    private int botInvestmentAmount(Player player, Game game, Company company) {
+        return (int) game.getRandom().nextDouble(company.getMinInvestment(), player.getBalance());
     }
 }

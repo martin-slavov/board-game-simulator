@@ -98,8 +98,9 @@ public class Board {
     public String toString() {
         StringBuilder sb = new StringBuilder("Game Board Layout:\n");
         for (Square square : board) {
-            sb.append(square).append("\n");
+            sb.append(square).append(" ");
         }
+        System.out.println();
         return sb.toString();
     }
 

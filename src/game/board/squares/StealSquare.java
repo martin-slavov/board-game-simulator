@@ -43,8 +43,10 @@ public class StealSquare extends Square {
             return;
         }
 
+        if (player.canNotGainOrLoseMoney()) return;
+
         // Check if the player already has an active steal plan.
-        if (player.hasStealPlan()) {
+        if (player.getStealPlan() != null) {
             System.out.println("You already have an active steal plan.");
         } else {
             // If the player has no plan, ask if they want to set one.
@@ -114,6 +116,8 @@ public class StealSquare extends Square {
             player.setStealPlan(targetSquareType);
             System.out.println("Your steal plan is now active for " + targetSquareType + " squares.");
         }
+
+        player.setStealPlan(targetSquareType);
     }
 
     private String botWantToSteal(Game game) {

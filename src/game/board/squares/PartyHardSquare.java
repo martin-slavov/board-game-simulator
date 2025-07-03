@@ -27,6 +27,9 @@ public class PartyHardSquare extends Square {
     @Override
     public void performAction(Player player, Game game) {
         System.out.println(player.getName() + " has passed through the " + getType() + " square.");
+
+        if (player.canNotGainOrLoseMoney()) return;
+
         player.deductMoney(PARTY_COST);
 
         System.out.println(player.getName() + " paid " + PARTY_COST + " for the party. New balance: " + player.getBalance());

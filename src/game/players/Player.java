@@ -19,11 +19,10 @@ public class Player {
      * Defined as a constant to ensure consistency.
      */
     public static final double INITIAL_BALANCE = 1000.0;
-    public static final int BOARD_SIZE = 20;
 
     private final String name; // of the player
     private double balance;
-    private int currentPosition;
+    private int currentPositionIndex;
     private boolean hasStealPlan;
     private final List<Investment> investments;
     private int trapsActivated;
@@ -41,7 +40,7 @@ public class Player {
         this.name = name;
         this.balance = INITIAL_BALANCE; // All players start with a fixed amount
         this.isBot = isBot;
-        this.currentPosition = 0; // All players start at position 0 (Start Square)
+        this.currentPositionIndex = 0; // All players start at position 0 (Start Square)
         this.hasStealPlan = false;
         this.investments = new ArrayList<>();
         this.trapsActivated = 0;
@@ -53,14 +52,10 @@ public class Player {
 
     public void move() {
         int steps = Dice.rollTwoSidedDice();
-        int newPosition = currentPosition + steps;
-        currentPosition = newPosition % 20;
+        int newPosition = currentPositionIndex + steps;
+        currentPositionIndex = newPosition % 20;
 
-        System.out.println(this.name + " се предвижи " + steps + " стъпки напред.");
-
-//        // Сигурно ще се премести в startGame метода
-//        Square currentSquare = board.getBoard().get(currentPosition);
-//        currentSquare.performAction(player, game);
+        System.out.println(this.name + " moved " + steps + " steps forward.");
     }
 
     public SquareType getStealPlan() {
@@ -137,8 +132,8 @@ public class Player {
      *
      * @return The current board position (0-indexed).
      */
-    public int getCurrentPosition() {
-        return currentPosition;
+    public int getCurrentPositionIndex() {
+        return currentPositionIndex;
     }
 
     /**
@@ -176,9 +171,9 @@ public class Player {
     public boolean canNotGainOrLoseMoney() {
         if (turnsInNeutralState > 0) {
             System.out.println("Не може да печелите и губите пари още " + turnsInNeutralState-- + " пъти.");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public void setTurnsInNeutralState(int turnsInNeutralState) {

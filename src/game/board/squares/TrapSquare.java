@@ -43,6 +43,12 @@ public class TrapSquare extends Square {
      */
     @Override
     public void performAction(Player player, Game game) {
+
+        if (player.getStealPlan() == SquareType.TRAP) {
+            System.out.println("Success! " + player.getName() + " gained 100 money because of your steal plan!");
+            player.addMoney(100);
+        }
+
         System.out.println(player.getName() + " landed on a " + getType() + " square.");
 
         if (owner == null) {
@@ -125,7 +131,7 @@ public class TrapSquare extends Square {
                 player.deductMoney(chosenTrap.getInvestmentCost()); // Deduct the cost from the player's balance.
                 activeTrap = chosenTrap; // Assign the chosen trap to the square's active trap.
                 owner = player; // Assign the player as the owner of this square's trap.
-                System.out.println(player.getName() + " successfully set a trap of type: " + chosenTrap.getType());
+                System.out.println(owner.getName() + " successfully set a trap of type: " + chosenTrap.getType());
 
             } else {
                 // If the player does not have enough money for the chosen trap.
@@ -170,17 +176,19 @@ public class TrapSquare extends Square {
         System.out.println("You landed on an enemy trap.");
         System.out.println(activeTrap.getDescription()); // Prints what the trap does
         switch (activeTrap.getType()) {
-            case "Tax Audit" -> {
-                player.deductMoney(player.getBalance() * 0.1); // -10% of the player's balance
-                System.out.println(activeTrap.getDescription());
-            }
+            case "Tax Audit" -> player.deductMoney(player.getBalance() * 0.1); // -10% of the player's balance
             case "Cat Divorce" -> {
                 System.out.println("Press ENTER to roll a 10-sided die");
-                game.getScanner().nextLine();
+                if (!player.isBot()) {
+                    game.getScanner().nextLine();
+                }
+
                 int getRandomNumber = Dice.rollTenSidedDice();
                 if (getRandomNumber == 2 || getRandomNumber == 8) {
                     player.setTurnsInNeutralState(3);
                     System.out.println("You will not gain or lose money for 3 turns");
+                } else {
+                    System.out.println("You got lucky! Nothing will happen.");
                 }
             }
             case "Propaganda" -> {

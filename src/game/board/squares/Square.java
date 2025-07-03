@@ -40,6 +40,6 @@ public abstract class Square {
      */
     @Override
     public String toString() {
-        return "[Тип: %s]".formatted(type);
+        return "[%s]".formatted(type);
     }
 }

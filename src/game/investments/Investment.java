@@ -1,8 +1,10 @@
 package game.investments;
 
+import game.Game;
+
 public class Investment {
     private final Company company;      // The company the investment is made in
-    private final double investedAmount; // The amount of money invested
+    private final double amount; // The amount of money invested
     private double profitLoss;         // The calculated profit or loss from the investment
     private boolean isCalculated;       // Flag to track if the result has been calculated
 
@@ -11,13 +13,14 @@ public class Investment {
      */
     public Investment(Company company, double investedAmount) {
         this.company = company;
-        this.investedAmount = investedAmount;
+        this.amount = investedAmount;
         this.profitLoss = 0.0;
         this.isCalculated = false;
     }
 
     /**
      * Gets the company the investment is made in
+     *
      * @return The Company object.
      */
     public Company getCompany() {
@@ -26,14 +29,16 @@ public class Investment {
 
     /**
      * Gets the amount of money that was invested.
+     *
      * @return The invested amount.
      */
-    public double getInvestedAmount() {
-        return investedAmount;
+    public double getAmount() {
+        return amount;
     }
 
     /**
      * Gets the calculated profit or loss for this investment.
+     *
      * @return The profit/loss amount.
      */
     public double getProfitLoss() {
@@ -42,6 +47,7 @@ public class Investment {
 
     /**
      * Sets the calculated profit or loss for this investment.
+     *
      * @param profitLoss The calculated profit or loss amount.
      */
     public void setProfitLoss(double profitLoss) {
@@ -51,9 +57,32 @@ public class Investment {
 
     /**
      * Checks if the investment result has been calculated yet.
+     *
      * @return True if the result is calculated, false otherwise.
      */
     public boolean isCalculated() {
         return isCalculated;
+    }
+
+    /**
+     * The method should use the company's return coefficient and risk interval to calculate the result.
+     * @return The calculated profit or loss amount.
+     */
+    public double calculateInvestmentOutcome(Game game) {
+        int randomFactor = game.getRandom().nextInt(company.getRiskMin(), company.getRiskMax() + 1);
+        return amount * ((double) randomFactor / 100);
+
+        // TODO: Refactor and improve investment outcome calculation logic.
+    }
+
+
+    @Override
+    public String toString() {
+        return "Investment{" +
+                "company=" + company +
+                ", investedAmount=" + amount +
+                ", profitLoss=" + profitLoss +
+                ", isCalculated=" + isCalculated +
+                '}';
     }
 }
