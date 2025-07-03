@@ -28,7 +28,7 @@ public class PartyHardSquare extends Square {
     public void performAction(Player player, Game game) {
         System.out.println(player.getName() + " has passed through the " + getType() + " square.");
 
-        if (player.canNotGainOrLoseMoney()) return;
+        if (player.isInNeutralState()) return;
 
         player.deductMoney(PARTY_COST);
 

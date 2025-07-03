@@ -4,7 +4,6 @@ import game.Game;
 import game.players.Player;
 
 public class StartSquare extends Square {
-    // TODO: For better maintainability, this constant can be moved to a dedicated constants class.
     private static final double BONUS_AMOUNT = 200.0;
 
     /**
@@ -25,7 +24,7 @@ public class StartSquare extends Square {
     @Override
     public void performAction(Player player, Game game) {
         System.out.println(player.getName() + " landed on " + getType());
-        if (player.canNotGainOrLoseMoney()) return;
+        if (player.isInNeutralState()) return;
 
         player.addMoney(BONUS_AMOUNT);
         System.out.println(player.getName() + " received " + BONUS_AMOUNT + " money. " +

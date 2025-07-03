@@ -32,7 +32,7 @@ public class ChanceSquare extends Square {
      * TODO: Complete the Javadoc.
      *
      * @param player The player who landed on the square.
-     * @param game The main Game instance (not used directly in this method, but required by the parent class signature).
+     * @param game   The main Game instance (not used directly in this method, but required by the parent class signature).
      */
     @Override
     public void performAction(Player player, Game game) {
@@ -79,7 +79,7 @@ public class ChanceSquare extends Square {
     /**
      * Applies a positive monetary outcome to the player based on the chance roll.
      *
-     * @param player The player who gains money.
+     * @param player     The player who gains money.
      * @param chanceRoll The result of the 100-sided die roll.
      */
     private void positiveOutcome(Player player, int chanceRoll) {
@@ -94,7 +94,7 @@ public class ChanceSquare extends Square {
     /**
      * Applies a negative monetary outcome to the player based on the chance roll.
      *
-     * @param player The player who loses money.
+     * @param player     The player who loses money.
      * @param chanceRoll The result of the 100-sided die roll.
      */
     private static void negativeOutcome(Player player, int chanceRoll) {

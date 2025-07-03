@@ -29,7 +29,7 @@ public class StealSquare extends Square {
      * The player can choose to set a steal plan, unless they are under a penalty.
      *
      * @param player The player who landed on the square.
-     * @param game The main Game instance, providing access to shared resources like the scanner.
+     * @param game   The main Game instance, providing access to shared resources like the scanner.
      */
     @Override
     public void performAction(Player player, Game game) {
@@ -43,7 +43,7 @@ public class StealSquare extends Square {
             return;
         }
 
-        if (player.canNotGainOrLoseMoney()) return;
+        if (player.isInNeutralState()) return;
 
         // Check if the player already has an active steal plan.
         if (player.getStealPlan() != null) {
@@ -59,7 +59,7 @@ public class StealSquare extends Square {
      * This method handles user input and delegates to the next step.
      *
      * @param player The player who is setting the plan.
-     * @param game The Game instance for user input.
+     * @param game   The Game instance for user input.
      */
     private void askToSetStealPlan(Player player, Game game) {
         System.out.println("""
@@ -86,7 +86,7 @@ public class StealSquare extends Square {
      * Prompts the player to choose which square type will trigger their steal plan.
      *
      * @param player The player who is setting the plan.
-     * @param game The Game instance for user input.
+     * @param game   The Game instance for user input.
      */
     private void askForTargetSquare(Player player, Game game) {
         System.out.println("""

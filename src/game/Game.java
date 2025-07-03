@@ -30,6 +30,7 @@ public class Game {
 
     /**
      * Provides access to the shared Scanner instance for user input.
+     *
      * @return The Scanner instance.
      */
     public Scanner getScanner() {
@@ -38,6 +39,7 @@ public class Game {
 
     /**
      * Provides access to the shared Random instance for general random number generation.
+     *
      * @return The Random instance.
      */
     public Random getRandom() {
@@ -132,6 +134,7 @@ public class Game {
 
     /**
      * Displays the current stats for the given player.
+     *
      * @param player The player whose stats are to be displayed.
      */
     private void displayPlayerStats(Player player) {
@@ -155,6 +158,7 @@ public class Game {
 
     /**
      * Handles the actions for a single player's turn.
+     *
      * @param player The player whose turn it is.
      */
     private void handlePlayerTurn(Player player) {
@@ -177,6 +181,7 @@ public class Game {
     /**
      * Processes all active investments for a given player.
      * Calculates profits/losses and updates the player's balance.
+     *
      * @param player The player whose investments are to be processed.
      */
     private void processInvestments(Player player) {
@@ -200,6 +205,7 @@ public class Game {
 
     /**
      * Pauses the game execution for a specified duration.
+     *
      * @param milliseconds The duration of the pause in milliseconds.
      */
     private static void pause(long milliseconds) {

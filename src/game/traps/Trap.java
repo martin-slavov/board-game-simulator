@@ -7,11 +7,11 @@ import game.players.Player;
  * Each trap has a name, description, penalty, and investment cost.
  */
 public class Trap {
-    private String type;
-    private int investmentCost;
-    private String description;
-    private Player owner;
-    private boolean isActive;
+    private final String type;
+    private final int investmentCost;
+    private final String description;
+    private final Player owner;
+    private final boolean isActive;
 
 
     /**
@@ -27,8 +27,6 @@ public class Trap {
     }
 
     // --- Getters ---
-
-
     public String getType() {
         return type;
     }
@@ -39,14 +37,6 @@ public class Trap {
 
     public String getDescription() {
         return description;
-    }
-
-    public Player getOwner() {
-        return owner;
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 
     /**

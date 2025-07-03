@@ -106,6 +106,7 @@ public class Board {
 
     /**
      * Gets the list of the square
+     *
      * @return The square's type.
      */
     public List<Square> getBoard() {

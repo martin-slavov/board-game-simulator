@@ -10,11 +10,11 @@ public class Company {
     /**
      * Constructs a new Company object with all its specific attributes.
      *
-     * @param name The name of the company.
-     * @param minInvestment The minimum amount required to invest.
+     * @param name              The name of the company.
+     * @param minInvestment     The minimum amount required to invest.
      * @param returnCoefficient The coefficient used to calculate profit/loss.
-     * @param riskMin The minimum value of the risk interval.
-     * @param riskMax The maximum value of the risk interval.
+     * @param riskMin           The minimum value of the risk interval.
+     * @param riskMax           The maximum value of the risk interval.
      */
 
     public Company(String name, double minInvestment, double returnCoefficient, int riskMin, int riskMax) {
@@ -27,6 +27,7 @@ public class Company {
 
     /**
      * Gets the name of the company.
+     *
      * @return The company's name.
      */
     public String getName() {
@@ -35,6 +36,7 @@ public class Company {
 
     /**
      * Gets the minimum required investment amount.
+     *
      * @return The minimum investment.
      */
     public double getMinInvestment() {
@@ -43,6 +45,7 @@ public class Company {
 
     /**
      * Gets the return coefficient for the company.
+     *
      * @return The return coefficient.
      */
     public double getReturnCoefficient() {
@@ -51,6 +54,7 @@ public class Company {
 
     /**
      * Gets the minimum value of the risk interval.
+     *
      * @return The minimum risk value.
      */
     public int getRiskMin() {
@@ -59,6 +63,7 @@ public class Company {
 
     /**
      * Gets the maximum value of the risk interval.
+     *
      * @return The maximum risk value.
      */
     public int getRiskMax() {

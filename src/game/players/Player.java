@@ -16,16 +16,13 @@ public class Player {
 
     /**
      * The starting balance for every player.
-     * Defined as a constant to ensure consistency.
      */
     public static final double INITIAL_BALANCE = 1000.0;
 
     private final String name; // of the player
     private double balance;
     private int currentPositionIndex;
-    private boolean hasStealPlan;
     private final List<Investment> investments;
-    private int trapsActivated;
     private final boolean isBot; // true for the bot, false for the human player
     private int turnsInNeutralState;
     private boolean canNotUseSteelSquare;
@@ -41,15 +38,17 @@ public class Player {
         this.balance = INITIAL_BALANCE; // All players start with a fixed amount
         this.isBot = isBot;
         this.currentPositionIndex = 0; // All players start at position 0 (Start Square)
-        this.hasStealPlan = false;
         this.investments = new ArrayList<>();
-        this.trapsActivated = 0;
         this.turnsInNeutralState = 0;
         canNotUseSteelSquare = false;
         isUnderBadLuckEffect = false;
         canNotPlaceTrap = false;
     }
 
+    /**
+     * Moves the player forward on the board by rolling a dice.
+     * The player's position wraps around if they go beyond the board size.
+     */
     public void move() {
         int steps = Dice.rollTwoSidedDice();
         int newPosition = currentPositionIndex + steps;
@@ -58,34 +57,74 @@ public class Player {
         System.out.println(this.name + " moved " + steps + " steps forward.");
     }
 
+    /**
+     * Gets the current steal plan type the player has active.
+     *
+     * @return The SquareType of the active steal plan, or null if no plan is active.
+     */
     public SquareType getStealPlan() {
         return stealPlan;
     }
 
+    /**
+     * Sets the player's steal plan to a specific SquareType.
+     *
+     * @param stealPlan The SquareType for the new steal plan. Set to null to clear the plan.
+     */
     public void setStealPlan(SquareType stealPlan) {
         this.stealPlan = stealPlan;
     }
 
+    /**
+     * Checks if the player is currently unable to place a trap.
+     *
+     * @return True if the player cannot place a trap, false otherwise.
+     */
     public boolean isCanNotPlaceTrap() {
         return canNotPlaceTrap;
     }
 
+    /**
+     * Sets whether the player can place a trap.
+     *
+     * @param canNotPlaceTrap True to prevent the player from placing traps, false to allow.
+     */
     public void setCanNotPlaceTrap(boolean canNotPlaceTrap) {
         this.canNotPlaceTrap = canNotPlaceTrap;
     }
 
+    /**
+     * Checks if the player is currently under a bad luck effect.
+     *
+     * @return True if the player is under a bad luck effect, false otherwise.
+     */
     public boolean isUnderBadLuckEffect() {
         return isUnderBadLuckEffect;
     }
 
+    /**
+     * Sets whether the player is under a bad luck effect.
+     *
+     * @param underBadLuckEffect True to put the player under bad luck, false to remove the effect.
+     */
     public void setUnderBadLuckEffect(boolean underBadLuckEffect) {
         isUnderBadLuckEffect = underBadLuckEffect;
     }
 
+    /**
+     * Checks if the player is currently unable to use the Steal Square's ability.
+     *
+     * @return True if the player cannot use the Steal Square, false otherwise.
+     */
     public boolean isCanNotUseSteelSquare() {
         return canNotUseSteelSquare;
     }
 
+    /**
+     * Sets whether the player can use the Steal Square's ability.
+     *
+     * @param canNotUseSteelSquare True to prevent the player from using the Steal Square, false to allow.
+     */
     public void setCanNotUseSteelSquare(boolean canNotUseSteelSquare) {
         this.canNotUseSteelSquare = canNotUseSteelSquare;
     }
@@ -137,38 +176,22 @@ public class Player {
     }
 
     /**
-     * Updates the player's position on the board.
-     * Uses the modulo operator to handle wrapping around the board.
+     * Gets the number of turns the player remains in a neutral state
+     * (cannot gain or lose money).
      *
-     * @param newPosition The new raw position (can be greater than board size).
+     * @return The number of turns remaining in neutral state.
      */
-//    public void setPosition(int newPosition) {
-//        this.currentSquare = newPosition % BOARD_SIZE;
-//    }
-
-    /**
-     * Checks if the player has an active "Steal" plan.
-     *
-     * @return True if a steal plan is active, false otherwise.
-     */
-    public boolean hasStealPlan() {
-        return hasStealPlan;
-    }
-
-    /**
-     * Sets the status of the player's "Steal" plan.
-     *
-     * @param hasStealPlan True to activate a steal plan, false to deactivate.
-     */
-    public void setHasStealPlan(boolean hasStealPlan) {
-        this.hasStealPlan = hasStealPlan;
-    }
-
     public int getTurnsInNeutralState() {
         return turnsInNeutralState;
     }
 
-    public boolean canNotGainOrLoseMoney() {
+    /**
+     * Checks if the player is currently in a neutral state, meaning they cannot
+     * gain or lose money. If in neutral state, decrements the remaining turns.
+     *
+     * @return True if the player is in a neutral state and cannot gain/lose money, false otherwise.
+     */
+    public boolean isInNeutralState() {
         if (turnsInNeutralState > 0) {
             System.out.println("Не може да печелите и губите пари още " + turnsInNeutralState-- + " пъти.");
             return true;
@@ -176,6 +199,11 @@ public class Player {
         return false;
     }
 
+    /**
+     * Sets the number of turns the player will remain in a neutral state.
+     *
+     * @param turnsInNeutralState The number of turns to set for the neutral state.
+     */
     public void setTurnsInNeutralState(int turnsInNeutralState) {
         this.turnsInNeutralState = turnsInNeutralState;
     }
@@ -205,32 +233,5 @@ public class Player {
      */
     public void addInvestment(Investment investment) {
         this.investments.add(investment);
-    }
-
-    /**
-     * Increments the count of traps activated by the player.
-     */
-    public void incrementTrapsActivated() {
-        this.trapsActivated++;
-    }
-
-    /**
-     * Resets the count of activated traps to zero, for the new cycle.
-     */
-    public void resetTrapsActivated() {
-        this.trapsActivated = 0;
-    }
-
-    /**
-     * Gets the count of traps activated by the player in the current cycle.
-     *
-     * @return The number of activated traps.
-     */
-    public int getTrapsActivated() {
-        return trapsActivated;
-    }
-
-    public boolean isHasStealPlan() {
-        return hasStealPlan;
     }
 }

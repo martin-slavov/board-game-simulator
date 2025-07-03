@@ -170,7 +170,7 @@ public class TrapSquare extends Square {
         }
 
         // Check if the player  money-related effects.
-        if (player.canNotGainOrLoseMoney()) return;
+        if (player.isInNeutralState()) return;
 
         // Apply the trap's effect based on its type.
         System.out.println("You landed on an enemy trap.");
